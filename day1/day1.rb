@@ -16,8 +16,8 @@ class SumGroups
     @sum_groups = sum_groups
   end
 
-  def max_group_total
-    @sum_groups.flat_map(&:sum).max
+  def max_group_total(n = 1)
+    @sum_groups.flat_map(&:sum).sort.reverse.take(n).sum
   end
 end
 
@@ -48,7 +48,10 @@ if __FILE__ == $0
     end
   else
     input = File.open("input.txt")
-    p SumGroups.build(input).max_group_total
+    sg = SumGroups.build(input)
+
+    p "Part 1: #{sg.max_group_total}"
+    p "Part 1: #{sg.max_group_total(3)}"
   end
 end
 
